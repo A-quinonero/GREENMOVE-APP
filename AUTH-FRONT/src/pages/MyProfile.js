@@ -45,47 +45,51 @@ class MyProfile extends Component {
             />
           </div>
           <div className="d-flex justify-content-center pt-3">
-          <div className="row d-flex align-items-center justify-content-center btnBlueProfile">
-            <div className="col text-center textprof">
-              {/* <img className="medalProfile" src={accions} alt="" srcset=""/> */}
-              <p>
-                <b>{this.state.user.myAccions.length}</b>
-              </p>
-              <p className=""><i>Created</i></p>
+            <div className="row d-flex align-items-center justify-content-center btnBlueProfile">
+              <div className="col text-center textprof">
+                {/* <img className="medalProfile" src={accions} alt="" srcset=""/> */}
+                <p>
+                  <b>{this.state.user.myAccions.length}</b>
+                </p>
+                <p className="">
+                  <i>Created</i>
+                </p>
+              </div>
+              <div className="col text-center textprof">
+                <p>
+                  <b>{this.state.user.joinAccions.length}</b>
+                </p>
+                <p className="">
+                  <i>Joined</i>
+                </p>
+                {/* <img className="medalProfile" src={joinMod} alt="" srcset=""/> */}
+              </div>
             </div>
-            <div className="col text-center textprof">
-              <p>
-                <b>{this.state.user.joinAccions.length}</b>
-              </p>
-              <p className=""><i>Joined</i></p>
-              {/* <img className="medalProfile" src={joinMod} alt="" srcset=""/> */}
-            </div>
-          </div>
           </div>
           <div className="text-justify profile-text justify-content-center">
-            
             <div className="textoProfile ml-5 mt-5 mb-3">
               <p className="mt-4">
                 <b>Name:</b> {this.state.user.name}
               </p>
-            
+
               <p className="mt-4">
                 <b>Lastname:</b> {this.state.user.lastName}
               </p>
-              
+
               <p className="mt-4 aboutme">
                 <b>About me:</b> {this.state.user.sobreMi}
               </p>
+            </div>
+
+            <div className="d-flex justify-content-center text-center"></div>
+            <Link to="/private/add-events">
+              <div className="col text-center">
+                <button className="btn btnOrangeProf mt-4">
+                  Create Action
+                </button>
               </div>
-              
-              <div className="d-flex justify-content-center text-center"></div>
-              <Link to="/private/add-events">
-                <div className="col text-center">
-                  <button className="btn btnOrangeProf mt-4">Create Action</button>
-                </div>
-              </Link>
-              <br />
-           
+            </Link>
+            <br />
           </div>
         </div>
       </div>

@@ -72,8 +72,6 @@ class EventDetails extends Component {
       });
   };
 
-
-
   getMembers = () => {
     const { params } = this.props.match;
     const eventId = params.id;
@@ -112,32 +110,25 @@ class EventDetails extends Component {
     });
     return (
       <div className="p-3">
-        
-        
-          <img className="imgEvent" src={this.state.imageUrl} alt="" />
+        <img className="imgEvent" src={this.state.imageUrl} alt="" />
 
-          <h1 className="titleDetails">{this.state.title}</h1>
-          <p className="fechayhora">
-            <i>
-              {this.state.date} - {this.state.duration}h
-            </i>
-          </p>
-          <Link to = {`/private/modal-cancel/${this.state.eventId}`}>
-          {this.state.creator._id === this.props.user._id ? 
-            
+        <h1 className="titleDetails">{this.state.title}</h1>
+        <p className="fechayhora">
+          <i>
+            {this.state.date} - {this.state.duration}h
+          </i>
+        </p>
+        <Link to={`/private/modal-cancel/${this.state.eventId}`}>
+          {this.state.creator._id === this.props.user._id ? (
             <div className=" text-center pt-2 pb-3">
-              <button
-          
-                className="btn btnRedBig"
-              >
-                Cancel Action
-              </button>
-            </div> : <div></div>
-            }
-            </Link>
-          <form onSubmit={(e) => this.handleSubmit(e)}>
+              <button className="btn btnRedBig">Cancel Action</button>
+            </div>
+          ) : (
+            <div></div>
+          )}
+        </Link>
+        <form onSubmit={(e) => this.handleSubmit(e)}>
           <div className="d-flex justify-content-center bottonFixed">
-         
             <BottonJoin
               type="submit"
               userId={this.props.user._id}
@@ -232,9 +223,11 @@ class EventDetails extends Component {
             </Marker>
           )}
         </Map>
-        {this.state.creator._id === this.props.user._id ? 
-        <p className="someAdd">Something to add?</p>
-        : <span></span>}
+        {this.state.creator._id === this.props.user._id ? (
+          <p className="someAdd">Something to add?</p>
+        ) : (
+          <span></span>
+        )}
         <Message
           userId={this.props.user._id}
           members={this.state.members}
