@@ -95,6 +95,31 @@ router.get("/events/message", async (req, res, next) => {
   }
 });
 
+router.post("/delete-event", async (req, res, next) => {
+  const userId = req.body.userId;
+  const eventId = req.body.eventId;
+  console.log(req.body, "user");
+  await User.findByIdAndUpdate(userId, {
+    $pull: { myAccions: eventId },
+  });
+});
+
+router.post("/delete-notification", async (req, res, next) => {
+  try {
+    const userId = req.body.userId;
+    const notiId = req.body.notiId;
+    console.log(notiId, "NOTIFICATIONS");
+
+    return User.findByIdAndUpdate(userId, {
+      $pull: {
+        notifications: {_id: notiId}
+      },
+    });
+  } catch (err) {
+    console.log(err);
+  }
+});
+
 router.get("/events/:id", (req, res, next) => {
   if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
     res.status(400).json({ message: "Specified id is not valid" });
@@ -145,5 +170,7 @@ router.delete("/events/:id", (req, res, next) => {
       res.json(err);
     });
 });
+
+
 
 module.exports = router;

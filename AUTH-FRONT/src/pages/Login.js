@@ -27,7 +27,6 @@ class Login extends Component {
   handleFormSubmit = (event) => {
     event.preventDefault();
     const { username, password } = this.state;
-    //console.log('Login -> form submit', { username, password });
     let errorMessage = this.state.listOfUsers.findIndex(
       (user) => username === user.username
     );
@@ -46,8 +45,7 @@ class Login extends Component {
 
     let errorPassword = this.state.listOfUsers.findIndex(
       (user) => password === user.password
-      );
-      console.log(errorPassword, 'errroPassword')
+    );
 
     if (errorPassword === -1) {
       this.setState({
@@ -67,8 +65,6 @@ class Login extends Component {
     this.setState({ [name]: value });
   };
   render() {
-    console.log(this.state.listOfUsers, "allusers");
-
     const { username, password } = this.state;
     return (
       <div className="fondoApp position-absolute">
@@ -81,14 +77,14 @@ class Login extends Component {
               aria-label="Basic example"
             >
               <div className="m-2">
-                <Link to="/signup">
+                <Link style={{ textDecoration: "none" }} to="/signup">
                   <button type="radio" id="1" className="btn btnOffLog">
                     Sign up
                   </button>
                 </Link>
               </div>
               <div className="m-2 ">
-                <Link to="/login">
+                <Link style={{ textDecoration: "none" }} to="/login">
                   <button type="radio" id="2" className="btn btnOnLog">
                     Log in
                   </button>

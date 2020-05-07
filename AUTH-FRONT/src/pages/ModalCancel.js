@@ -7,21 +7,24 @@ import axios from "axios";
 class ModalCancel extends Component {
   constructor(props) {
     super(props);
-    this.state = { user: {}, members: [], eventId: "", creatorInfo: [], eventTitle:"" };
+    this.state = {
+      user: {},
+      members: [],
+      eventId: "",
+      creatorInfo: [],
+      eventTitle: "",
+    };
   }
 
   getMembers = () => {
     const { params } = this.props.match;
     const eventId = params.id;
-    // console.log(params.id, "paramsEvent")
     axios
       .get(process.env.REACT_APP_API_URI + `/api/events/${params.id}`)
       .then((responseFromApi) => {
         const creators = responseFromApi.data.creator;
-        console.log(responseFromApi, "creators");
         const members = responseFromApi.data.members;
-        const eventTitle = responseFromApi.data.title
-        // console.log (eventTitle, "modalcancel")
+        const eventTitle = responseFromApi.data.title;
         this.setState({
           members: members,
           eventTitle: eventTitle,
@@ -34,17 +37,16 @@ class ModalCancel extends Component {
       });
   };
 
-
   componentDidMount = () => {
     this.setState(this.props.user);
     this.getMembers();
-    console.log(this.state, "estado")
   };
+
   render() {
     return (
       <div className="mt-5">
         <div className="text-center">
-          <img className="modalImg" src={modalCorazon} alt="" srcset="" />
+          <img className="modalImg" src={modalCorazon} alt=""/>
         </div>
         <div className="text-center mt-5 textModal">
           <p>
@@ -55,14 +57,6 @@ class ModalCancel extends Component {
           <p>the action</p>
         </div>
         <div className="text-center mt-5 textModal2 mb-5">
-          <p>
-            <i>Tell something about the</i>{" "}
-          </p>
-          <p>
-            {" "}
-            <i>cancelation to the members</i>{" "}
-          </p>
-
           <CancelMessage
             className=""
             userId={this.props.user._id}

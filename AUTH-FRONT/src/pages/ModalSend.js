@@ -17,7 +17,7 @@ class ModalSend  extends Component{
     return (
       <div className = "mt-5">
           <div className ="text-center">
-            <img className="modalImg" src={send} alt="" srcset=""/>
+            <img className="modalImg" src={send} alt=""/>
         </div>
           <div className = "text-center mt-4 textModal">
           <p>Hi <b>{this.state.name}</b> !</p>
@@ -33,10 +33,10 @@ class ModalSend  extends Component{
             
           </div> 
           <div className="text-center pb-3">
-          <Link to="/private"><button className="btn btnOrange">Back to Explore</button></Link>
+          <Link style={{ textDecoration: 'none' }} to="/private"><button className="btn btnOrange">Back to Explore</button></Link>
           </div>
           <div className="text-center">
-          <Link to="/private/my-profile"><button className="btn btnBlue">Go to Profile</button></Link>
+          <Link style={{ textDecoration: 'none' }} to="/private/my-profile"><button className="btn btnBlue">Go to Profile</button></Link>
           </div>
         </div>
     )

@@ -2,6 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const router = express.Router();
 const User = require("../models/user");
+
 router.get("/my-events/:id", async (req, res, next) => {
   try{
   const userId = req.params.id
@@ -12,6 +13,7 @@ router.get("/my-events/:id", async (req, res, next) => {
   res.json(err)
   }
 });
+
 router.get("/join-events/:id", async (req, res, next) => {
   try{
   const userId = req.params.id
@@ -24,6 +26,7 @@ router.get("/join-events/:id", async (req, res, next) => {
   res.json(err)
   }
 });
+
 router.get("/profile", async (req, res, next) => {
   try{
     const userId = req.session.currentUser._id

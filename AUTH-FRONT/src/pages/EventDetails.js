@@ -24,16 +24,11 @@ class EventDetails extends Component {
 
   handleSubmit = (e) => {
     const { params } = this.props.match;
-
-    console.log(params.id, "id del evento");
-    console.log("USEEEEEEER ID :", this.props.user._id);
-    console.log("members", this.state.creator);
     e.preventDefault();
 
     let result = this.state.members.findIndex(
       (user) => user._id === this.props.user._id
     );
-    console.log(result);
     if (result > -1) {
       return service
         .deleteMember({ eventId: params.id, userId: this.props.user._id })
@@ -60,7 +55,6 @@ class EventDetails extends Component {
 
   getEvent = () => {
     const { params } = this.props.match;
-    // console.log(params.id, "paramsEvent")
     axios
       .get(process.env.REACT_APP_API_URI + `/api/events/${params.id}`)
       .then((responseFromApi) => {
@@ -75,12 +69,10 @@ class EventDetails extends Component {
   getMembers = () => {
     const { params } = this.props.match;
     const eventId = params.id;
-    // console.log(params.id, "paramsEvent")
     axios
       .get(process.env.REACT_APP_API_URI + `/api/events/${params.id}`)
       .then((responseFromApi) => {
         const creators = responseFromApi.data.creator;
-        console.log(responseFromApi, "creators");
         const members = responseFromApi.data.members;
         this.setState({
           members: members,
@@ -98,10 +90,7 @@ class EventDetails extends Component {
   }
 
   render() {
-    console.log(this.state.creatorInfo, "elestado");
-
     let position = this.state.coordinates;
-    console.log(position);
     const icon = L.icon({
       iconUrl: require(`../img/map-marker-alt-solid.svg`),
       iconSize: [24, 36],
@@ -118,13 +107,14 @@ class EventDetails extends Component {
             {this.state.date} - {this.state.duration}h
           </i>
         </p>
-        <Link to={`/private/modal-cancel/${this.state.eventId}`}>
-          {this.state.creator._id === this.props.user._id ? (
+        <Link
+          style={{ textDecoration: "none" }}
+          to={`/private/modal-cancel/${this.state.eventId}`}
+        >
+          {this.state.creator._id === this.props.user._id && (
             <div className=" text-center pt-2 pb-3">
               <button className="btn btnRedBig">Cancel Action</button>
             </div>
-          ) : (
-            <div></div>
           )}
         </Link>
         <form onSubmit={(e) => this.handleSubmit(e)}>
@@ -140,7 +130,7 @@ class EventDetails extends Component {
             {this.state.members.length > 3
               ? this.state.members.slice(0, 3).map((member) => {
                   return (
-                    <div>
+                    <div key={member._id}>
                       <div className="col text-center">
                         <img
                           className="memberImg"
@@ -154,7 +144,7 @@ class EventDetails extends Component {
                 })
               : this.state.members.map((member) => {
                   return (
-                    <div>
+                    <div key={member._id}>
                       <div className="col text-center">
                         <img
                           className="memberImg"
@@ -166,26 +156,12 @@ class EventDetails extends Component {
                     </div>
                   );
                 })}
-            {this.state.members.length > 3 ? (
+            {this.state.members.length > 3 && (
               <span className="mt-2">
                 <i>... {this.state.members.length - 3} more going</i>
               </span>
-            ) : (
-              <div></div>
             )}
           </div>
-          {/* <div className="row pt-3">
-            {this.state.members.map((member) => {
-              return (
-                <div>
-                  <div className="col text-center">
-                    <img className="memberImg" src={member.imageUrl} alt="" />
-                    <h3 className="textMyEvent text-dark">{member.name}</h3>
-                  </div>
-                </div>
-              );
-            })}
-          </div> */}
           <h5 className="mt-2">The Organizer:</h5>
           <div className="d-flex align-items-center m-2">
             <div>
@@ -223,10 +199,8 @@ class EventDetails extends Component {
             </Marker>
           )}
         </Map>
-        {this.state.creator._id === this.props.user._id ? (
+        {this.state.creator._id === this.props.user._id && (
           <p className="someAdd">Something to add?</p>
-        ) : (
-          <span></span>
         )}
         <Message
           userId={this.props.user._id}

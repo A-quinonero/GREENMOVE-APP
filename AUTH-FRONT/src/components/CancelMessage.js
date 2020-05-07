@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import service from "../api/service";
 import axios from "axios";
+import { withAuth } from "../lib/AuthProvider";
+import { Link } from "react-router-dom";
 
 class CancelMessage extends Component {
   constructor(props) {
@@ -12,7 +14,6 @@ class CancelMessage extends Component {
       notifications: "",
       eventId: "",
       eventTitle: "",
-      redirect: false,
     };
   }
 
@@ -29,11 +30,6 @@ class CancelMessage extends Component {
   };
   handleChange = (e) => {
     const { name, value } = e.target;
-    console.log(
-      this.props.members,
-      this.state.notifications,
-      "holaaaaaaNotifications"
-    );
     this.setState({
       [name]: value,
       eventId: this.props.eventId,
@@ -42,33 +38,36 @@ class CancelMessage extends Component {
     });
   };
 
-  deleteAction = () => {
-    const eventId = this.state.eventId;
-
-    axios
-      .delete(process.env.REACT_APP_API_URI + `/api/events/${eventId}`)
-      .then(() => {
-        // this.props.history.push("/private");
-      })
-      .catch((err) => {
-        console.log(err);
+  deleteAction = async () => {
+    try {
+      const eventId = this.state.eventId;
+      const userId = this.props.user._id;
+      axios.post(process.env.REACT_APP_API_URI + `/api/delete-event`, {
+        eventId,
+        userId,
       });
+      await axios.delete(
+        process.env.REACT_APP_API_URI + `/api/events/${eventId}`
+      );
+      await this.props.history.push("/private")
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   render() {
-    // console.log(this.props, "event title");
-
     if (this.props.creator === this.props.userId) {
-      //console.log(result);
       return (
         <form onSubmit={(e) => this.handleSubmitCancel(e)}>
           <div className="text-center ">
             <div>
-              <div className="textAreaCreator m-3">
-                <p
+              <div className="textAreaCreator m-5 mt-3">
+                <textarea
                   name="notifications"
-                  value={`${this.props.eventTitle} is canceled`}
-                ></p>
+                  onChange={(e) => this.handleChange(e)}
+                  placeholder="Tell something about the cancelation to the members..."
+                  value={this.state.notifications}
+                ></textarea>
               </div>
               <div className="text-center m-3 ">
                 <button
@@ -87,4 +86,4 @@ class CancelMessage extends Component {
     }
   }
 }
-export default CancelMessage;
+export default withAuth(CancelMessage);

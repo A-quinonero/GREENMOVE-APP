@@ -22,7 +22,7 @@ class Navbar extends Component {
       <nav className="logout">
         <Link to={"/"} id="home-btn"></Link>
             <div >
-            <a href  onClick={logout}>
+            <a href='true'  onClick={logout}>
               <img className="logoutLogo" src= {logoutLogo} alt="Logout"/>
             </a>{" "}
         </div>

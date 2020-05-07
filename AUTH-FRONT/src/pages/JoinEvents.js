@@ -4,7 +4,6 @@ import { Redirect } from "react-router";
 import { withAuth } from "../lib/AuthProvider";
 import { Link } from "react-router-dom";
 
-
 class JoinEvents extends Component {
   constructor(props) {
     super(props);
@@ -17,19 +16,17 @@ class JoinEvents extends Component {
     };
   }
   getProfile = () => {
-    console.log(this.props.user._id);
     axios
-      .get(process.env.REACT_APP_API_URI+`/api/join-events/${this.props.user._id}`)
+      .get(
+        process.env.REACT_APP_API_URI +
+          `/api/join-events/${this.props.user._id}`
+      )
       .then((responseFromApi) => {
-        console.log("responseeeeeee", responseFromApi.data);
-
         this.setState({
           joinAccions: responseFromApi.data.joinAccions,
         });
       });
   };
-
-
 
   componentDidMount() {
     this.setState({ user: this.props.user });
@@ -48,7 +45,7 @@ class JoinEvents extends Component {
       return (
         <div className="pt-3 m-3">
           <nav>
-            <h3 className ="text-center mb-3">Actions</h3>
+            <h3 className="text-center mb-3">Actions</h3>
             <div
               className="btn-group-active row d-flex justify-content-around "
               data-toggle="buttons"
@@ -56,14 +53,20 @@ class JoinEvents extends Component {
               aria-label="Basic example"
             >
               <div className="m-2">
-                <Link to="/private/my-actions">
+                <Link
+                  style={{ textDecoration: "none" }}
+                  to="/private/my-actions"
+                >
                   <button type="radio" id="1" className="btn btnOff">
                     Created
                   </button>
                 </Link>
               </div>
               <div className="m-2">
-                <Link to="/private/join-actions">
+                <Link
+                  style={{ textDecoration: "none" }}
+                  to="/private/join-actions"
+                >
                   <button type="radio" id="2" className="btn btnOn">
                     Joined
                   </button>
@@ -71,24 +74,33 @@ class JoinEvents extends Component {
               </div>
             </div>
           </nav>
-          <div className = "row d-flex justify-content-between eventGroup">
-          {this.state.joinAccions.map((event) => {
-            return (
-              <div className = "col-6">
-                <Link to={`/private/events/${event._id}`}>
-                  <div className="posRel">
-                <div className="imgMyEvent d-flex justify-content-center align-items-center" style={{backgroundImage:`url(${event.imageUrl})`}}>
+          <div className="row d-flex justify-content-between eventGroup">
+            {this.state.joinAccions.map((event) => {
+              return (
+                <div key={event._id} className="col-6">
+                  <Link
+                    style={{ textDecoration: "none" }}
+                    to={`/private/events/${event._id}`}
+                  >
+                    <div className="posRel">
+                      <div
+                        className="imgMyEvent d-flex justify-content-center align-items-center"
+                        style={{ backgroundImage: `url(${event.imageUrl})` }}
+                      ></div>
+                      <div className="ZZtop text-center">
+                        {/* <img src={this.state.} alt=""/> */}
+                        <div className="textMyEvent">
+                          <b>{event.title}</b>
+                        </div>
+                        <div className="">
+                          <i>{event.location}</i>
+                        </div>
+                      </div>
+                    </div>
+                  </Link>
                 </div>
-                  <div class="ZZtop text-center">
-                    {/* <img src={this.state.} alt=""/> */}
-                  <div className="textMyEvent"><b>{event.title}</b></div>
-                  <div className=""><i>{event.location}</i></div>
-                  </div>
-                  </div>
-                </Link>
-              </div>
-            );
-          })}
+              );
+            })}
           </div>
         </div>
       );

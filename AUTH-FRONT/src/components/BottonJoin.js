@@ -10,9 +10,9 @@ class BottonJoin extends Component {
       notifications: "",
     };
   }
+
   handleChange = (e) => {
     const { name, value } = e.target;
-    console.log(this.state.notifications, "holaaaaaaNotifications");
     this.setState({ [name]: value });
   };
 
@@ -20,26 +20,21 @@ class BottonJoin extends Component {
     let result = this.props.members.findIndex(
       (user) => user._id === this.props.userId
     );
-    //console.log(result);
 
-    {
-      if (result > -1) {
-        return (
-          <div className="text-right m-3 ">
-            <button className="btn btnBlueBig">Not Going</button>
-          </div>
-        );
-      } else if (this.props.userId === this.props.creator) {
-        return (
-          <div></div>
-        );
-      } else {
-        return (
-          <div className="text-right m-3  ">
-            <button className=" btn btnOrangeBig">Going</button>
-          </div>
-        );
-      }
+    if (result > -1) {
+      return (
+        <div className="text-right m-3 ">
+          <button className="btn btnBlueBig">Not Going</button>
+        </div>
+      );
+    } else if (this.props.userId === this.props.creator) {
+      return <div></div>;
+    } else {
+      return (
+        <div className="text-right m-3  ">
+          <button className=" btn btnOrangeBig">Going</button>
+        </div>
+      );
     }
   }
 }

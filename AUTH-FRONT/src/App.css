@@ -1,14 +1,12 @@
+*{
+  font-family: 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
 @media screen 
   and (min-width: 500px)
   and (-webkit-min-device-pixel-ratio: 1) { 
 
 
-body {
-  background-color:  rgba(250, 230, 186, 0.3) !important;
-  width: 100%;
-  height: 100%;
- 
-}
   #root{
 width: 414px;
 border: 1px solid lightgray;
@@ -369,14 +367,17 @@ top: 7px !important;
 /* noticeboard */
 .logo-notice{
   width: 20px;
- 
 }
 .imgEvent{
   object-fit: cover;
   width: 100%;
   height: 250px;
-  box-shadow: 0 0 10px 2px rgba(0,0,0,.2) !important;
+  box-shadow: 0 0 10px 2px rgba(0,0,0,.1) !important;
   border-radius: 5px;
+}
+.imgEvent:hover{
+  box-shadow: 0 0 10px 2px rgba(0,0,0,.3) !important;
+  margin-top: 1px;
 }
 .text-noticeboard{
   margin: 50px 20px 8px 20px;
@@ -404,7 +405,11 @@ opacity: 0.6;
   width: 100%;
   height: 150px;
   border-radius: 5px;
+  }
 
+  .imgMyEvent:hover{
+    box-shadow: 0 0 10px 2px rgba(0,0,0,.3) !important;
+    margin-top: 1px;
   }
 
 .ZZtop{
@@ -532,6 +537,12 @@ background-color: rgba(255, 255, 255, 0) !important;
     margin: auto 0;
     box-shadow: 0 0 10px 2px rgba(0,0,0,.3) !important;
     width: 260px;
+  }
+  .closeNoti{
+    right: 10px;
+    top: 1px;
+    background-color:#F9F3E1;
+    border: none;
   }
   .memberImg{
     width: 35px;
