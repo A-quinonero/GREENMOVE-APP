@@ -365,6 +365,10 @@ top: 7px !important;
   display: none;
   }
 /* noticeboard */
+.titulo{
+  color: #FACF72;
+  text-shadow: 1px 1px white, 2px 2px rgb(245, 193, 83);
+}
 .logo-notice{
   width: 20px;
 }

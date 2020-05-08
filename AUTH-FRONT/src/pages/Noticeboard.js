@@ -45,9 +45,7 @@ class Noticeboard extends Component {
 
     return (
       <div className="pt-4 ">
-        <div className="titulo">
-          <h1 className="text-center">Green Move!</h1>
-        </div>
+        <h1 className="text-center titulo">Green Move!</h1>
         <h3 className="text-center mb-4">Explore</h3>
         <div className="d-flex justify-content-center ">
           <input

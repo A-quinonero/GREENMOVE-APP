@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import service from "../api/service";
 import axios from "axios";
 import { withAuth } from "../lib/AuthProvider";
-import { Link } from "react-router-dom";
 
 class CancelMessage extends Component {
   constructor(props) {
